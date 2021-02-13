@@ -1,22 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>This is template</h1>
-    {% for ite in item_list %}
-    <ul>
-        <li>
-            <a href="/food/{{ ite.id }}">{{ite.id}} -- {{ite.item_name}}</a>
-        </li>
-    </ul>    
+{% extends 'food/base.html' %}
+{% block body %} 
+{% for ite in item_list %}
+    <div class="row">
+        <div class="col-md-4 offset-md-2">
+            <img class="card" height="150px" src="{{ ite.item_image}}">
+
+        </div>
+        <div class="col-md-4">
+            <h3>{{ ite.item_name }}</h3>
+            <h5>{{ ite.item_desc }}</h5>
+            <h6>Rs{{ ite.item_price }}</h6>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'food:detail' ite.id %}" class="btn btn-success">Details</a>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}
+
+<!-- <ul>
+    <li>
+        <a href="{% url 'food:detail' ite.id %}">{{ite.id}} -- {{ite.item_name}}</a> -->
+
+        <!-- <a href="/food/{{ ite.id }}">{{ite.id}} -- {{ite.item_name}}</a> -->
+    <!-- </li>
+</ul>     -->
+
+<!-- Why remove hard coded url--makes it tightly coupled approach. Makes it less dynamic. -->
+     
 
 
-        
-    {% endfor %}
-</body>
-</html>
+
